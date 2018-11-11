@@ -118,4 +118,6 @@ textarea{
 	display:inline-block;
 	margin-right:1em;
 }
+.content img{max-width:100%;}
 
+	p{margin-top:1em;}
