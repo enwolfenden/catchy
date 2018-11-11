@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<?xml version='1.0' encoding='UTF-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>catchy - upload a cat</title>
+		<link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+		<script>
+		// Variable to hold request
+var request;
+
+// Bind to the submit event of our form
+$("#catform").submit(function(event){
+
+    // Prevent default posting of form - put here to work in case of errors
+    event.preventDefault();
+
+    // Abort any pending request
+    if (request) {
+        request.abort();
+    }
+    // setup some local variables
+    var $form = $(this);
+
+    // Let's select and cache all the fields
+    var $inputs = $form.find("input, select, button, textarea");
+
+    // Serialize the data in the form
+    var serializedData = $form.serialize();
+
+    // Let's disable the inputs for the duration of the Ajax request.
+    // Note: we disable elements AFTER the form data has been serialized.
+    // Disabled form elements will not be serialized.
+    $inputs.prop("disabled", true);
+
+    // fire off the request to /form.php
+        request = $.ajax({
+            url: "https://script.google.com/macros/s/AKfycby0CXDi8kCCDpaolDN1E3qazMF24ev6H7o559LKPr1rbRIvWiE/exec",
+            type: "post",
+            data: serializedData
+        });
+
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("Hooray, it worked!");
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+    });
+
+});
+	</script>
+    </head>
+    <body>
+        <div class="nav">
+			<div class="logo">
+				<img src="images/logogreengrey.png" alt="catchy">
+			</div>
+			<div class="container">
+				<ul>
+					<li><a href="home.html">home</a></li>
+					<li><a href="about.html">about</a></li> 
+					<li><a href="upload.html">upload a cat</a></li>
+					<li><a href="find.html">find a cat</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
+			<h1>upload a cat</h1>
+			<form method="post" class="catform">
+				<div class="inlineform">
+					<label for="name" required>name</label>
+					<input name="name" id="name" class="rounded">
+				</div>
+				<div class="inlineform">
+					<label for="breed">breed</label>
+					<select name="breed" class="rounded">
+						<option value="abyssinian">abyssinian</option>
+						<option value="aegean">aegean</option>
+						<option value="asian">asian</option>
+						<option value="balinese">balinese</option>
+						<option value="bengal">bengal</option>
+						<option value="black">black</option>
+						<option value="birman">birman</option>
+						<option value="bombay">bombay</option>
+						<option value="britishlonghair">british longhair</option>
+						<option value="britishshorthair">british shorthair</option>
+						<option value="burmese">burmese</option>
+						<option value="chartreux">chartreux</option>
+						<option value="cornishrex">cornish rex</option>
+						<option value="devonrex">devon rex</option>
+						<option value="europeanshorthair">european shorthair</option>
+						<option value="exoticshorthair">exotic shorthair</option>
+						<option value="foldex">foldex</option>
+						<option value="german rex">german rex</option>
+						<option value="ginger">ginger</option>
+						<option value="himalayan">himalayan</option>
+						<option value="japanesebobtail">japanese bobtail</option>
+						<option value="javanese">javanese</option>
+						<option value="maine coon">maine coon</option>
+						<option value="manx">manx</option>
+						<option value="munchkin">munchkin</option>
+						<option value="norwegian forest">norwegian forest</option>
+						<option value="oregon rex"> oregon rex</option>
+						<option value="other">other</option>
+						<option value="persian">persian</option>
+						<option value="russian blue">russian blue</option>
+						<option value="savannah">savannah</option>
+						<option value="scottishfold">scottish fold</option>
+						<option value="selkirkrex">selkirk rex</option>
+						<option value="siamese">siamese</option>
+						<option value="siberian">siberian</option>
+						<option value="sphynx">sphynx</option>
+						<option value="tabby">tabby</option>
+						<option value="thai">thai</option>
+						<option value="tortoiseshell">tortoise shell</option>
+						<option value="turkishvan">turkish van</option>
+						<option value="white">white</option>
+					</select>
+				</div>
+				<div>
+					<label for="age" required>age</label>
+					<div class="slider">
+						<input type="range" min="0" max="20" value="10" class="ageslider" id="ageslider">
+					</div>
+				</div>
+				<div class="sex">
+					<label for="sex" required>sex</label>
+					<div class="sexoption"><input type="radio" name="sex" value="male"> male</div>
+					<div class="sexoption"><input type="radio" name="sex" value="female"> female</div>
+					<div class="sexoption"><input type="radio" name="sex" value="other"> other</div>
+				</div>
+				
+				<div>
+					<label for="bio" required>bio</label>
+					<textarea name="bio" id="bio" class="rounded"></textarea>
+				</div>
+				<div>
+					<label for="indooroutdoor" required>this cat is...</label>
+					<div class="indooropt"><input type="radio" name="indooroutdoor" value="indoor"> indoor</div>
+					<div class="indooropt"><input type="radio" name="indooroutdoor" value="outdoor"> outdoor</div>
+					<div class="indooropt"><input type="radio" name="indooroutdoor" value="both"> both</div>
+				</div>
+				<div>
+					<label for="hair" required>fur type</label>
+					<div class="hairopt"><input type="radio" name="hair" value="long"> long hair</div>
+					<div class="hairopt"><input type="radio" name="hair" value="medium"> medium hair</div>
+					<div class="hairopt"><input type="radio" name="hair" value="short"> short hair</div>
+					<div class="hairopt"><input type="radio" name="hair" value="none"> hairless</div>
+
+
+				</div>
+				<div>
+					<input type="checkbox" class="yesno" name="likescats" value="yes"> likes other cats? <br>
+					<input type="checkbox" class="yesno" name="likesdogs" value="yes"> likes dogs? <br>
+					<input type="checkbox" class="yesno" name="likeskids" value="yes"> likes children? <br>
+				</div>
+				<div class="inlineform">
+					<label for="postcode" required>postcode</label>
+					<input name="postcode" id="postcode" class="rounded">
+				</div>
+				<div class="inlineform">
+					<label for="email"  required>email</label>
+					<input name="email" id="email" class="rounded">
+				</div>
+				<div>
+					<label for="picture">photo</label>
+					<input type="file" name="picture" accept="image/*" value="choose image"></input>
+				</div>
+				<div>
+					<input type="submit" name="submit" id="submit" class="customsubmitbutton">
+				</div>
+			</form>
+		</div>
+    </body>
+</html>

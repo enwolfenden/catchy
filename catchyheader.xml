@@ -1,0 +1,10 @@
+<div class="nav">
+	<div class="container">
+		<ul>
+			<li><a href="#">home</a></li>
+			<li><a href="#">about</a></li> 
+			<li><a href="#">upload a cat</a></li>
+			<li><a href="#">find a cat</a></li>
+		</ul>
+	</div>
+</div>
